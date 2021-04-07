@@ -25,7 +25,7 @@ async function run(): Promise<void> {
 
         console.log(`versionFilePath : ${versionFilePath}`)
         console.log(`major : ${versionJson.major}`)
-        console.log(`minor : ${versionJson.miner}`)
+        console.log(`minor : ${versionJson.minor}`)
         console.log(`patch : ${versionJson.patch}`)
 
         core.setOutput("packageName", packageName);

@@ -190,7 +190,7 @@ function run() {
             let versionJson = JSON.parse(data.toString());
             console.log(`versionFilePath : ${versionFilePath}`);
             console.log(`major : ${versionJson.major}`);
-            console.log(`minor : ${versionJson.miner}`);
+            console.log(`minor : ${versionJson.minor}`);
             console.log(`patch : ${versionJson.patch}`);
             core.setOutput("packageName", packageName);
             // const payload = JSON.stringify(github.context.payload, undefined, 2)
