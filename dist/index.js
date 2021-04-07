@@ -188,7 +188,9 @@ function run() {
             const data = fs.readFileSync(versionFilePath);
             let versionJson = JSON.parse(data.toString());
             console.log(`versionFilePath : ${versionFilePath}`);
-            console.log(`versionJson : ${versionJson}`);
+            console.log(`major : ${versionJson.major}`);
+            console.log(`minor : ${versionJson.miner}`);
+            console.log(`patch : ${versionJson.patch}`);
             core.setOutput("packageName", packageName);
             // const payload = JSON.stringify(github.context.payload, undefined, 2)
             // console.log(`The event payload: ${payload}`)      
