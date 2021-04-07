@@ -9,8 +9,11 @@ async function run(): Promise<void> {
 
         const packageName = inputs.fileName + "_v1.0.0"
         console.log(`fileName : ${inputs.fileName}`)
-        
-        const version = 
+
+        let githubWorkspacePath = process.env['GITHUB_WORKSPACE']
+
+        console.log(`githubWorkspacePath : ${githubWorkspacePath}`)
+
         core.setOutput("packageName", packageName);
 
         const payload = JSON.stringify(github.context.payload, undefined, 2)

@@ -837,7 +837,9 @@ function run() {
             const inputs = input_helper_1.getInputs();
             const packageName = inputs.fileName + "_v1.0.0";
             console.log(`fileName : ${inputs.fileName}`);
-            const version = core.setOutput("packageName", packageName);
+            let githubWorkspacePath = process.env['GITHUB_WORKSPACE'];
+            console.log(`githubWorkspacePath : ${githubWorkspacePath}`);
+            core.setOutput("packageName", packageName);
             const payload = JSON.stringify(github.context.payload, undefined, 2);
             console.log(`The event payload: ${payload}`);
         }
