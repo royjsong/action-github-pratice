@@ -12,16 +12,24 @@ async function run(): Promise<void> {
 
         const versionFilePath = process.env['GITHUB_WORKSPACE'] + "/version.json"
         let versionJson;
-        fs.readFile('versionFilePath', 'utf8', (err, data) => {
-            versionJson = JSON.parse(data)
-        })
+        try {
+            if (fs.existsSync(versionFilePath)) {
+                console.error("file exsist!! ")
+            }
+        } catch(err) {
+            console.error("file not exsist!! " + err)
+          }
+
+        // fs.readFile(versionFilePath, 'utf8', (err, data) => {
+        //     versionJson = JSON.parse(data)
+        // })
 
         console.log(`versionFilePath : ${versionFilePath}`)
 
         core.setOutput("packageName", packageName);
 
-        const payload = JSON.stringify(github.context.payload, undefined, 2)
-        console.log(`The event payload: ${payload}`)      
+        // const payload = JSON.stringify(github.context.payload, undefined, 2)
+        // console.log(`The event payload: ${payload}`)      
     } catch (err) {
         core.setFailed(err.message)
     }
