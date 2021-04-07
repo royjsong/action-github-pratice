@@ -1,7 +1,7 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
 import {getInputs} from './input-helper'
-import * as fs from 'fs'
+import * as fs from 'fs-extra'
 
 async function run(): Promise<void> {
     try {
@@ -11,7 +11,6 @@ async function run(): Promise<void> {
         console.log(`fileName : ${inputs.fileName}`)
 
         const versionFilePath = process.env['GITHUB_WORKSPACE'] + "/version.json"
-        let versionJson;
         try {
             if (fs.existsSync(versionFilePath)) {
                 console.error("file exsist!! ")
@@ -19,12 +18,13 @@ async function run(): Promise<void> {
         } catch(err) {
             console.error("file not exsist!! " + err)
           }
-
+        let versionJson = fs.readJsonSync(versionFilePath);
         // fs.readFile(versionFilePath, 'utf8', (err, data) => {
         //     versionJson = JSON.parse(data)
         // })
 
         console.log(`versionFilePath : ${versionFilePath}`)
+        console.log(`versionJson : ${versionJson}`)
 
         core.setOutput("packageName", packageName);
 

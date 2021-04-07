@@ -133,6 +133,14 @@ var Inputs;
 
 /***/ }),
 
+/***/ 266:
+/***/ (function(module) {
+
+module.exports = eval("require")("fs-extra");
+
+
+/***/ }),
+
 /***/ 325:
 /***/ (function(__unusedmodule, exports, __webpack_require__) {
 
@@ -169,7 +177,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const core = __importStar(__webpack_require__(470));
 const input_helper_1 = __webpack_require__(583);
-const fs = __importStar(__webpack_require__(747));
+const fs = __importStar(__webpack_require__(266));
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -177,7 +185,6 @@ function run() {
             const packageName = inputs.fileName + "_v1.0.0";
             console.log(`fileName : ${inputs.fileName}`);
             const versionFilePath = process.env['GITHUB_WORKSPACE'] + "/version.json";
-            let versionJson;
             try {
                 if (fs.existsSync(versionFilePath)) {
                     console.error("file exsist!! ");
@@ -186,10 +193,12 @@ function run() {
             catch (err) {
                 console.error("file not exsist!! " + err);
             }
+            let versionJson = fs.readJsonSync(versionFilePath);
             // fs.readFile(versionFilePath, 'utf8', (err, data) => {
             //     versionJson = JSON.parse(data)
             // })
             console.log(`versionFilePath : ${versionFilePath}`);
+            console.log(`versionJson : ${versionJson}`);
             core.setOutput("packageName", packageName);
             // const payload = JSON.stringify(github.context.payload, undefined, 2)
             // console.log(`The event payload: ${payload}`)      
