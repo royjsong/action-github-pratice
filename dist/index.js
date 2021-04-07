@@ -133,14 +133,6 @@ var Inputs;
 
 /***/ }),
 
-/***/ 266:
-/***/ (function(module) {
-
-module.exports = eval("require")("fs-extra");
-
-
-/***/ }),
-
 /***/ 325:
 /***/ (function(__unusedmodule, exports, __webpack_require__) {
 
@@ -177,7 +169,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const core = __importStar(__webpack_require__(470));
 const input_helper_1 = __webpack_require__(583);
-const fs = __importStar(__webpack_require__(266));
+const fs = __importStar(__webpack_require__(747));
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -193,10 +185,8 @@ function run() {
             catch (err) {
                 console.error("file not exsist!! " + err);
             }
-            let versionJson = fs.readJsonSync(versionFilePath);
-            // fs.readFile(versionFilePath, 'utf8', (err, data) => {
-            //     versionJson = JSON.parse(data)
-            // })
+            const data = fs.readFileSync(versionFilePath);
+            let versionJson = JSON.parse(data.toString());
             console.log(`versionFilePath : ${versionFilePath}`);
             console.log(`versionJson : ${versionJson}`);
             core.setOutput("packageName", packageName);

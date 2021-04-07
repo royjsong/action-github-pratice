@@ -1,7 +1,7 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
 import {getInputs} from './input-helper'
-import * as fs from 'fs-extra'
+import * as fs from 'fs'
 
 async function run(): Promise<void> {
     try {
@@ -17,11 +17,11 @@ async function run(): Promise<void> {
             }
         } catch(err) {
             console.error("file not exsist!! " + err)
-          }
-        let versionJson = fs.readJsonSync(versionFilePath);
-        // fs.readFile(versionFilePath, 'utf8', (err, data) => {
-        //     versionJson = JSON.parse(data)
-        // })
+        }
+
+        const data = fs.readFileSync(versionFilePath)
+        let versionJson = JSON.parse(data.toString())
+        
 
         console.log(`versionFilePath : ${versionFilePath}`)
         console.log(`versionJson : ${versionJson}`)
