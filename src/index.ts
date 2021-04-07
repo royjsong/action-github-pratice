@@ -18,7 +18,7 @@ async function run(): Promise<void> {
         const data = fs.readFileSync(versionFilePath)
         let versionJson = JSON.parse(data.toString())        
         const version  = "v" + versionJson.major + "." + versionJson.minor + "." + versionJson.patch
-        const date = dataFormat(new Date(), "yyyyMMdd")
+        const date = dataFormat(new Date(), "yyyymmdd")
         console.log(`version : ${version}`)
         console.log(`fileName : ${inputs.fileName}`)
         console.log(`gitSha : ${inputs.gitSha}`)

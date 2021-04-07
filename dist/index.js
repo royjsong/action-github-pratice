@@ -192,7 +192,7 @@ function run() {
             const data = fs.readFileSync(versionFilePath);
             let versionJson = JSON.parse(data.toString());
             const version = "v" + versionJson.major + "." + versionJson.minor + "." + versionJson.patch;
-            const date = dateformat_1.default(new Date(), "yyyyMMdd");
+            const date = dateformat_1.default(new Date(), "yyyymmdd");
             console.log(`version : ${version}`);
             console.log(`fileName : ${inputs.fileName}`);
             console.log(`gitSha : ${inputs.gitSha}`);
