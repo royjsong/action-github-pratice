@@ -7,7 +7,7 @@ async function run(): Promise<void> {
     try {
         const inputs = getInputs()
 
-        const packageName = inputs.fileName + "_v1.0.0"
+        const packageName = inputs.fileName + "_v1.0.0" + "_" + inputs.gitSha
         console.log(`fileName : ${inputs.fileName}`)
 
         const versionFilePath = process.env['GITHUB_WORKSPACE'] + "/version.json"

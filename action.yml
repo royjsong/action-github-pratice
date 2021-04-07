@@ -5,6 +5,9 @@ inputs:
     description: 'added as prefix of package name.'
     required: true
     default: 'source'
+  gitSha:  # id of input
+    description: 'The commit SHA of recently commit.'
+    required: false
 outputs:
   packageName: # id of output
     description: 'the name of release package'

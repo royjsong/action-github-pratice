@@ -128,6 +128,7 @@ exports.Inputs = void 0;
 var Inputs;
 (function (Inputs) {
     Inputs["FILE_NAME"] = "fileName";
+    Inputs["GIT_SHA"] = "gitSha";
 })(Inputs = exports.Inputs || (exports.Inputs = {}));
 
 
@@ -174,7 +175,7 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const inputs = input_helper_1.getInputs();
-            const packageName = inputs.fileName + "_v1.0.0";
+            const packageName = inputs.fileName + "_v1.0.0" + "_" + inputs.gitSha;
             console.log(`fileName : ${inputs.fileName}`);
             const versionFilePath = process.env['GITHUB_WORKSPACE'] + "/version.json";
             try {
@@ -565,9 +566,11 @@ exports.getInputs = void 0;
 const core = __importStar(__webpack_require__(470));
 const constants_1 = __webpack_require__(211);
 function getInputs() {
-    const name = core.getInput(constants_1.Inputs.FILE_NAME, { required: true });
+    const fileName = core.getInput(constants_1.Inputs.FILE_NAME, { required: true });
+    const gitSha = core.getInput(constants_1.Inputs.GIT_SHA, { required: false });
     const inputs = {
-        fileName: name,
+        fileName: fileName,
+        gitSha: gitSha
     };
     return inputs;
 }

@@ -1,3 +1,4 @@
 export interface InputFields {
-    fileName : String
+    fileName : String,
+    gitSha: String
 }
