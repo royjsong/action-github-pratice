@@ -1,13 +1,13 @@
 name: 'Hello World'
 description: 'Greet someone and record the time'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  fileName:  # id of input
+    description: 'added as prefix of package name.'
     required: true
-    default: 'World'
+    default: 'source'
 outputs:
-  virsion: # id of output
-    description: 'currunt version'
+  packageName: # id of output
+    description: 'the name of release package'
 runs:
   using: 'node12'
   main: 'dist/index.js'
