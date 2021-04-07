@@ -4422,7 +4422,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Inputs = void 0;
 var Inputs;
 (function (Inputs) {
-    Inputs["FILE_NAME"] = "name";
+    Inputs["FILE_NAME"] = "fileName";
 })(Inputs = exports.Inputs || (exports.Inputs = {}));
 
 
