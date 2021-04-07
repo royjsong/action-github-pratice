@@ -177,7 +177,7 @@ function run() {
             const inputs = input_helper_1.getInputs();
             const packageName = inputs.fileName + "_v1.0.0" + "_" + inputs.gitSha;
             console.log(`fileName : ${inputs.fileName}`);
-            console.log(`gitSha : ${inputs.gitSha}`);
+            console.log(`gitSha : ${inputs.gitSha.slice(0, 8)}`);
             const versionFilePath = process.env['GITHUB_WORKSPACE'] + "/version.json";
             try {
                 if (fs.existsSync(versionFilePath)) {
