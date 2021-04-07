@@ -831,14 +831,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const core = __importStar(__webpack_require__(470));
 const github = __importStar(__webpack_require__(469));
 const input_helper_1 = __webpack_require__(583);
+const fs = __importStar(__webpack_require__(747));
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const inputs = input_helper_1.getInputs();
             const packageName = inputs.fileName + "_v1.0.0";
             console.log(`fileName : ${inputs.fileName}`);
-            let githubWorkspacePath = process.env['GITHUB_WORKSPACE'];
-            console.log(`githubWorkspacePath : ${githubWorkspacePath}`);
+            const versionFilePath = process.env['GITHUB_WORKSPACE'] + "/version.json";
+            let versionJson;
+            fs.readFile('versionFilePath', 'utf8', (err, data) => {
+                versionJson = JSON.parse(data);
+            });
+            console.log(`versionFilePath : ${versionFilePath}`);
             core.setOutput("packageName", packageName);
             const payload = JSON.stringify(github.context.payload, undefined, 2);
             console.log(`The event payload: ${payload}`);
