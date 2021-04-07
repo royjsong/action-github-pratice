@@ -1,6 +1,7 @@
 import * as core from '@actions/core'
 import {getInputs} from './input-helper'
 import * as fs from 'fs'
+import dataFormat from 'dateformat'
 
 async function run(): Promise<void> {
     try {
@@ -17,11 +18,13 @@ async function run(): Promise<void> {
         const data = fs.readFileSync(versionFilePath)
         let versionJson = JSON.parse(data.toString())        
         const version  = "v" + versionJson.major + "." + versionJson.minor + "." + versionJson.patch
+        const date = dataFormat(new Date(), "yyyyMMdd")
         console.log(`version : ${version}`)
         console.log(`fileName : ${inputs.fileName}`)
         console.log(`gitSha : ${inputs.gitSha}`)
+        console.log(`date : ${date}`)
 
-        const packageName = inputs.fileName + "_" + version + "_" + inputs.gitSha.slice(0, 8) + "_" + new Date('yyyyMMdd')
+        const packageName = inputs.fileName + "_" + version + "_" + inputs.gitSha.slice(0, 8) + "_" + date
         core.setOutput("packageName", packageName);
     } catch (err) {
         core.setFailed(err.message)

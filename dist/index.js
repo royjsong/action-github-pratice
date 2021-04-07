@@ -167,10 +167,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const core = __importStar(__webpack_require__(470));
 const input_helper_1 = __webpack_require__(583);
 const fs = __importStar(__webpack_require__(747));
+const dateformat_1 = __importDefault(__webpack_require__(552));
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -188,10 +192,12 @@ function run() {
             const data = fs.readFileSync(versionFilePath);
             let versionJson = JSON.parse(data.toString());
             const version = "v" + versionJson.major + "." + versionJson.minor + "." + versionJson.patch;
+            const date = dateformat_1.default(new Date(), "yyyyMMdd");
             console.log(`version : ${version}`);
             console.log(`fileName : ${inputs.fileName}`);
             console.log(`gitSha : ${inputs.gitSha}`);
-            const packageName = inputs.fileName + "_" + version + "_" + inputs.gitSha.slice(0, 8) + "_" + new Date('yyyyMMdd');
+            console.log(`date : ${date}`);
+            const packageName = inputs.fileName + "_" + version + "_" + inputs.gitSha.slice(0, 8) + "_" + date;
             core.setOutput("packageName", packageName);
         }
         catch (err) {
@@ -532,6 +538,14 @@ function getState(name) {
 }
 exports.getState = getState;
 //# sourceMappingURL=core.js.map
+
+/***/ }),
+
+/***/ 552:
+/***/ (function(module) {
+
+module.exports = eval("require")("dateformat");
+
 
 /***/ }),
 
