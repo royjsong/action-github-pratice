@@ -1,4 +1,3 @@
 export interface InputFields {
-    name : String,
-    whoToGreet : String
+    fileName : String
 }

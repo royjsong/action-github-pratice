@@ -835,9 +835,9 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const inputs = input_helper_1.getInputs();
-            console.log(`Hello ${inputs.name}`);
-            const version = "v1.0.0";
-            core.setOutput("version", version);
+            const packageName = inputs.fileName + "_v1.0.0";
+            console.log(`fileName : ${inputs.fileName}`);
+            const version = core.setOutput("packageName", packageName);
             const payload = JSON.stringify(github.context.payload, undefined, 2);
             console.log(`The event payload: ${payload}`);
         }
@@ -4339,11 +4339,9 @@ exports.getInputs = void 0;
 const core = __importStar(__webpack_require__(470));
 const constants_1 = __webpack_require__(694);
 function getInputs() {
-    const name = core.getInput(constants_1.Inputs.Name);
-    const whoToGreet = core.getInput(constants_1.Inputs.WhoToGreet, { required: true });
+    const name = core.getInput(constants_1.Inputs.FILE_NAME, { required: true });
     const inputs = {
-        name: name,
-        whoToGreet: whoToGreet
+        fileName: name,
     };
     return inputs;
 }
@@ -4424,8 +4422,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Inputs = void 0;
 var Inputs;
 (function (Inputs) {
-    Inputs["Name"] = "name";
-    Inputs["WhoToGreet"] = "who-to-greet";
+    Inputs["FILE_NAME"] = "name";
 })(Inputs = exports.Inputs || (exports.Inputs = {}));
 
 

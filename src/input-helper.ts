@@ -3,12 +3,10 @@ import {Inputs} from './constants'
 import {InputFields} from './input-fields'
 
 export function getInputs(): InputFields {
-    const name = core.getInput(Inputs.Name)
-    const whoToGreet = core.getInput(Inputs.WhoToGreet, {required: true})
+    const name = core.getInput(Inputs.FILE_NAME, {required: true})
 
     const inputs = {
-        name : name,
-        whoToGreet : whoToGreet
+        fileName : name,
     } as InputFields
 
     return inputs

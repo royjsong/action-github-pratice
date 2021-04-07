@@ -1,4 +1,3 @@
 export enum Inputs {
-    Name = 'name',
-    WhoToGreet = 'who-to-greet'
+    FILE_NAME = 'name'     
 }

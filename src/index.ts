@@ -6,10 +6,12 @@ import {getInputs} from './input-helper'
 async function run(): Promise<void> {
     try {
         const inputs = getInputs()
-        console.log(`Hello ${inputs.name}`);
+
+        const packageName = inputs.fileName + "_v1.0.0"
+        console.log(`fileName : ${inputs.fileName}`)
         
-        const version = "v1.0.0"
-        core.setOutput("version", version);
+        const version = 
+        core.setOutput("packageName", packageName);
 
         const payload = JSON.stringify(github.context.payload, undefined, 2)
         console.log(`The event payload: ${payload}`)      
