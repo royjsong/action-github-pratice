@@ -1,3 +1,3 @@
 export enum Inputs {
-    FILE_NAME = 'name'     
+    FILE_NAME = 'fileName'     
 }
