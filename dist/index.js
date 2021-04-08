@@ -15328,7 +15328,10 @@ function run() {
             console.log(`archive`);
             archive.pipe(output);
             console.log(`pipe`);
-            archive.glob('**/*', { cwd: process.env['GITHUB_WORKSPACE'] });
+            archive.glob('**/*', {
+                cwd: process.env['GITHUB_WORKSPACE'],
+                ignore: ['./examples/**/*', 'README.md', `${packageName}.zip`]
+            });
             console.log(`glob`);
             archive.finalize();
         }
