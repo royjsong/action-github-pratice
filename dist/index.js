@@ -15304,7 +15304,7 @@ function run() {
             const versionFilePath = process.env['GITHUB_WORKSPACE'] + "/version.json";
             try {
                 if (fs.existsSync(versionFilePath)) {
-                    console.log("found version.json.");
+                    console.log("found version.json file.");
                 }
             }
             catch (err) {
@@ -15321,7 +15321,16 @@ function run() {
             console.log(`date : ${date}`);
             const packageName = inputs.fileName + "_" + version + "_" + inputs.gitSha.slice(0, 6) + "_" + date;
             core.setOutput("packageName", packageName);
-            const lines = __webpack_require__(747).readFileSync(process.env['GITHUB_WORKSPACE'] + '/.archiveignore', 'utf-8').split('\n').filter(Boolean);
+            const archiveIgnorePath = process.env['GITHUB_WORKSPACE'] + '/.archiveignore';
+            try {
+                if (fs.existsSync(archiveIgnorePath)) {
+                    console.log("found archiveignore file.");
+                }
+            }
+            catch (err) {
+                console.error("Not Found .archiveignore");
+            }
+            const lines = __webpack_require__(747).readFileSync(archiveIgnorePath, 'utf-8').split('\n').filter(Boolean);
             lines.push(packageName + ".zip");
             console.log(`.achiveignore :  ${lines}`);
             const output = fs.createWriteStream(process.env['GITHUB_WORKSPACE'] + '/' + packageName + ".zip");

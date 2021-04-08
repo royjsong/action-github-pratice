@@ -3,7 +3,6 @@ import {getInputs} from './input-helper'
 import * as fs from 'fs'
 import dataFormat from 'dateformat'
 import archiver from 'archiver'
-import { truncateSync } from 'node:fs'
 
 async function run(): Promise<void> {
     try {
@@ -11,7 +10,7 @@ async function run(): Promise<void> {
         const versionFilePath = process.env['GITHUB_WORKSPACE'] + "/version.json"
         try {
             if (fs.existsSync(versionFilePath)) {
-                console.log("found version.json.")
+                console.log("found version.json file.")
             }
         } catch(err) {
             console.error("Not Found version.json")
@@ -29,7 +28,16 @@ async function run(): Promise<void> {
         const packageName = inputs.fileName + "_" + version + "_" + inputs.gitSha.slice(0, 6) + "_" + date
         core.setOutput("packageName", packageName);
 
-        const lines: string[] = require('fs').readFileSync(process.env['GITHUB_WORKSPACE'] + '/.archiveignore', 'utf-8').split('\n').filter(Boolean);
+        const archiveIgnorePath = process.env['GITHUB_WORKSPACE'] + '/.archiveignore'
+        try {
+            if (fs.existsSync(archiveIgnorePath)) {
+                console.log("found archiveignore file.")
+            }
+        } catch(err) {
+            console.error("Not Found .archiveignore")
+        }
+
+        const lines: string[] = require('fs').readFileSync(archiveIgnorePath, 'utf-8').split('\n').filter(Boolean);
         lines.push(packageName + ".zip")
         console.log(`.achiveignore :  ${lines}`)        
     
