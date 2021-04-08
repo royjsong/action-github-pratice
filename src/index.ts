@@ -39,7 +39,7 @@ async function run(): Promise<void> {
         console.log(`pipe`)
         archive.glob('**/*', {
             cwd: process.env['GITHUB_WORKSPACE'],
-            ignore: ['examples/**/*', 'README.md', `${packageName}.zip`, '.github/**/*'],
+            ignore: ['examples/**', 'README.md', `${packageName}.zip`, '.github/**'],
             dot: true,
         });
         console.log(`glob`)
