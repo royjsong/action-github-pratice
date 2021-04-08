@@ -3,6 +3,7 @@ import {getInputs} from './input-helper'
 import * as fs from 'fs'
 import dataFormat from 'dateformat'
 import archiver from 'archiver'
+import { truncateSync } from 'node:fs'
 
 async function run(): Promise<void> {
     try {
@@ -38,7 +39,8 @@ async function run(): Promise<void> {
         console.log(`pipe`)
         archive.glob('**/*', {
             cwd: process.env['GITHUB_WORKSPACE'],
-            ignore: ['./examples/**/*', 'README.md', `${packageName}.zip`]
+            ignore: ['examples/**/*', 'README.md', `${packageName}.zip`, '.github/**/*'],
+            dot: true,
         });
         console.log(`glob`)
         archive.finalize();
