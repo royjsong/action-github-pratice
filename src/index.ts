@@ -31,21 +31,18 @@ async function run(): Promise<void> {
 
         const lines: string[] = require('fs').readFileSync(process.env['GITHUB_WORKSPACE'] + '/.archiveignore', 'utf-8').split('\n').filter(Boolean);
         lines.push(packageName + ".zip")
-        console.log(`lines ${lines}`)        
+        console.log(`.achiveignore :  ${lines}`)        
     
         const output = fs.createWriteStream(process.env['GITHUB_WORKSPACE'] + '/' + packageName + ".zip")
         const archive = archiver('zip', {
             zlib: {level : 9 }
         })
-        console.log(`archive`)
         archive.pipe(output);
-        console.log(`pipe`)
         archive.glob('**/*', {
             cwd: process.env['GITHUB_WORKSPACE'],
             ignore: lines,
             dot: true,
         });
-        console.log(`glob`)
         archive.finalize();
     } catch (err) {
         core.setFailed(err.message)
