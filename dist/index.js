@@ -15322,8 +15322,9 @@ function run() {
             const packageName = inputs.fileName + "_" + version + "_" + inputs.gitSha.slice(0, 6) + "_" + date;
             core.setOutput("packageName", packageName);
             const lines = __webpack_require__(747).readFileSync(process.env['GITHUB_WORKSPACE'] + '/.archiveignore', 'utf-8').split('\n').filter(Boolean);
+            lines.push(packageName + ".zip");
             console.log(`lines ${lines}`);
-            const output = fs.createWriteStream(process.env['GITHUB_WORKSPACE'] + '/package/' + packageName + ".zip");
+            const output = fs.createWriteStream(process.env['GITHUB_WORKSPACE'] + '/' + packageName + ".zip");
             const archive = archiver_1.default('zip', {
                 zlib: { level: 9 }
             });

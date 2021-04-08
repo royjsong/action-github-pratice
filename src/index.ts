@@ -29,10 +29,11 @@ async function run(): Promise<void> {
         const packageName = inputs.fileName + "_" + version + "_" + inputs.gitSha.slice(0, 6) + "_" + date
         core.setOutput("packageName", packageName);
 
-        const lines = require('fs').readFileSync(process.env['GITHUB_WORKSPACE'] + '/.archiveignore', 'utf-8').split('\n').filter(Boolean);
-        console.log(`lines ${lines}`)
-
-        const output = fs.createWriteStream(process.env['GITHUB_WORKSPACE'] + '/package/' + packageName + ".zip")
+        const lines: string[] = require('fs').readFileSync(process.env['GITHUB_WORKSPACE'] + '/.archiveignore', 'utf-8').split('\n').filter(Boolean);
+        lines.push(packageName + ".zip")
+        console.log(`lines ${lines}`)        
+    
+        const output = fs.createWriteStream(process.env['GITHUB_WORKSPACE'] + '/' + packageName + ".zip")
         const archive = archiver('zip', {
             zlib: {level : 9 }
         })
