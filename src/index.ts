@@ -2,6 +2,7 @@ import * as core from '@actions/core'
 import {getInputs} from './input-helper'
 import * as fs from 'fs'
 import dataFormat from 'dateformat'
+import archiver from 'archiver'
 
 async function run(): Promise<void> {
     try {
@@ -26,6 +27,18 @@ async function run(): Promise<void> {
 
         const packageName = inputs.fileName + "_" + version + "_" + inputs.gitSha.slice(0, 6) + "_" + date
         core.setOutput("packageName", packageName);
+
+
+        const output = fs.createWriteStream(process.env['GITHUB_WORKSPACE'] + '/' + packageName + ".zip")
+        const archive = archiver('zip', {
+            zlib: {level : 9 }
+        })
+        console.log(`archive`)
+        archive.pipe(output);
+        console.log(`pipe`)
+        archive.glob('**/*', {cwd: process.env['GITHUB_WORKSPACE']});
+        console.log(`glob`)
+        archive.finalize();
     } catch (err) {
         core.setFailed(err.message)
     }
