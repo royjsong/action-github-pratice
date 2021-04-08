@@ -15323,7 +15323,7 @@ function run() {
             core.setOutput("packageName", packageName);
             const lines = __webpack_require__(747).readFileSync(process.env['GITHUB_WORKSPACE'] + '/.archiveignore', 'utf-8').split('\n').filter(Boolean);
             console.log(`lines ${lines}`);
-            const output = fs.createWriteStream(process.env['GITHUB_WORKSPACE'] + '/' + packageName + ".zip");
+            const output = fs.createWriteStream(process.env['GITHUB_WORKSPACE'] + '/package/' + packageName + ".zip");
             const archive = archiver_1.default('zip', {
                 zlib: { level: 9 }
             });
@@ -15332,7 +15332,7 @@ function run() {
             console.log(`pipe`);
             archive.glob('**/*', {
                 cwd: process.env['GITHUB_WORKSPACE'],
-                ignore: ['examples/**', 'README.md', `${packageName}.zip`, '.github/**'],
+                ignore: lines,
                 dot: true,
             });
             console.log(`glob`);
